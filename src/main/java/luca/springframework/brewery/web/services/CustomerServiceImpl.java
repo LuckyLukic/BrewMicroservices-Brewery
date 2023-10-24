@@ -1,6 +1,7 @@
 package luca.springframework.brewery.web.services;
 
-import luca.springframework.brewery.web.model.CustomerDTO;
+
+import luca.springframework.brewery.web.model.CustomerDto;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -8,8 +9,8 @@ import java.util.UUID;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Override
-    public CustomerDTO getCustomerById(UUID customerId) {
-        return CustomerDTO.builder().customerId(UUID.randomUUID())
+    public CustomerDto getCustomerById(UUID customerId) {
+        return CustomerDto.builder().customerId(UUID.randomUUID())
                 .customerName("Luca")
                 .build();
     }

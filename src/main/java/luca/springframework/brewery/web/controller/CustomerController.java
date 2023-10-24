@@ -1,6 +1,7 @@
 package luca.springframework.brewery.web.controller;
 
-import luca.springframework.brewery.web.model.CustomerDTO;
+
+import luca.springframework.brewery.web.model.CustomerDto;
 import luca.springframework.brewery.web.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class CustomerController {
     private CustomerServiceImpl customerServiceImpl;
 
     @GetMapping("/{customerId}")
-    private ResponseEntity<CustomerDTO> getCustomer (@PathVariable UUID customerId) {
+    private ResponseEntity<CustomerDto> getCustomer (@PathVariable UUID customerId) {
         return new ResponseEntity<> (customerServiceImpl.getCustomerById(customerId), HttpStatus.OK);
     }
 }
