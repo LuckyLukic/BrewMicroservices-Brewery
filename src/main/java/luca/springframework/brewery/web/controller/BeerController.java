@@ -24,7 +24,7 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity<BeerDto> handlePost (BeerDto beerDto) {
+    public ResponseEntity<BeerDto> handlePost (@RequestBody BeerDto beerDto) {
         BeerDto savedDto = beerServiceImpl.saveNewBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
