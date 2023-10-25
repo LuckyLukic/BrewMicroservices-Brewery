@@ -35,6 +35,12 @@ public class BeerController {
     @PutMapping("/{beerId}")
     public ResponseEntity<BeerDto> handleUpdate (@PathVariable UUID beerId, @RequestBody BeerDto beerDto) {
         beerServiceImpl.updateBeer(beerId, beerDto);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // we could have used @ResponseStatus and transform the method in a void one.
+    }
+    @DeleteMapping("/{beerId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)  //since we have an empty response we use this annotation to shorten the code
+    public void deleteBeer(@PathVariable UUID beerId) {
+
+        beerServiceImpl.deleteBeer(beerId);
     }
 }
