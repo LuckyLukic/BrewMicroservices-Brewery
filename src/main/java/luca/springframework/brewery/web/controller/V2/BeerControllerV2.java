@@ -1,6 +1,7 @@
 package luca.springframework.brewery.web.controller.V2;
 
 
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import luca.springframework.brewery.web.model.V2.BeerDtoV2;
 
@@ -11,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -45,5 +49,16 @@ public class BeerControllerV2 {
     public void deleteBeer(@PathVariable UUID beerId) {
 
         beerServiceImplV2.deleteBeer(beerId);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<List> validationErrorHandler(ConstraintViolationException e){
+        List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
+
+        e.getConstraintViolations().forEach(constraintViolation -> {
+            errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
+        });
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
