@@ -1,6 +1,7 @@
 package luca.springframework.brewery.web.controller.V2;
 
 
+import jakarta.validation.Valid;
 import luca.springframework.brewery.web.model.V2.BeerDtoV2;
 
 import luca.springframework.brewery.web.services.V2.BeerServiceImplV2;
@@ -25,7 +26,7 @@ public class BeerControllerV2 {
     }
 
     @PostMapping
-    public ResponseEntity<BeerDtoV2> handlePost (@RequestBody BeerDtoV2 beerDto) {
+    public ResponseEntity<BeerDtoV2> handlePost (@Valid @RequestBody BeerDtoV2 beerDto) {
         BeerDtoV2 savedDto = beerServiceImplV2.saveNewBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -35,7 +36,7 @@ public class BeerControllerV2 {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity<BeerDtoV2> handleUpdate (@PathVariable UUID beerId, @RequestBody BeerDtoV2 beerDto) {
+    public ResponseEntity<BeerDtoV2> handleUpdate (@Valid @PathVariable UUID beerId, @RequestBody BeerDtoV2 beerDto) {
         beerServiceImplV2.updateBeer(beerId, beerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // we could have used @ResponseStatus and transform the method in a void one.
     }
