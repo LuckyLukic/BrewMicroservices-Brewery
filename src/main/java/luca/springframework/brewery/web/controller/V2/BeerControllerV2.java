@@ -3,6 +3,8 @@ package luca.springframework.brewery.web.controller.V2;
 
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraintvalidation.SupportedValidationTarget;
 import luca.springframework.brewery.web.model.V2.BeerDtoV2;
 
 import luca.springframework.brewery.web.services.V2.BeerServiceImplV2;
@@ -10,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/api/v2/beer")
@@ -25,7 +29,7 @@ public class BeerControllerV2 {
     private BeerServiceImplV2 beerServiceImplV2;
 
     @GetMapping("/{beerId}")
-    private ResponseEntity<BeerDtoV2> getBeer (@PathVariable UUID beerId) {
+    private ResponseEntity<BeerDtoV2> getBeer ( @PathVariable UUID beerId) {
         return new ResponseEntity<>(beerServiceImplV2.getBeerById(beerId), HttpStatus.OK);
     }
 
@@ -40,7 +44,7 @@ public class BeerControllerV2 {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity<BeerDtoV2> handleUpdate (@Valid @PathVariable UUID beerId, @RequestBody BeerDtoV2 beerDto) {
+    public ResponseEntity<BeerDtoV2> handleUpdate (@PathVariable UUID beerId, @Valid @RequestBody BeerDtoV2 beerDto) {
         beerServiceImplV2.updateBeer(beerId, beerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // we could have used @ResponseStatus and transform the method in a void one.
     }
