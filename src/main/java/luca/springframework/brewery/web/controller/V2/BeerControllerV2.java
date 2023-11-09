@@ -1,10 +1,7 @@
 package luca.springframework.brewery.web.controller.V2;
 
 
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraintvalidation.SupportedValidationTarget;
 import luca.springframework.brewery.web.model.V2.BeerDtoV2;
 
 import luca.springframework.brewery.web.services.V2.BeerServiceImplV2;
@@ -12,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 

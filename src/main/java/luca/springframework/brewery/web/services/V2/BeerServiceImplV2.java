@@ -1,7 +1,6 @@
 package luca.springframework.brewery.web.services.V2;
 
 import lombok.extern.slf4j.Slf4j;
-import luca.springframework.brewery.web.model.BeerDto;
 import luca.springframework.brewery.web.model.V2.BeerDtoV2;
 import luca.springframework.brewery.web.model.V2.BeerStyleEnum;
 import org.springframework.stereotype.Service;

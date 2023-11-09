@@ -20,6 +20,6 @@ public class CustomerDto {
     private UUID customerId;
 
     @NotNull
-   @Size(min = 3, max = 100)
+    @Size(min = 3, max = 100)
     private String customerName;
 }

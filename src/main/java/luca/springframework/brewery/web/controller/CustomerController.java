@@ -1,10 +1,6 @@
 package luca.springframework.brewery.web.controller;
 
 
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import luca.springframework.brewery.web.model.BeerDto;
 import luca.springframework.brewery.web.model.CustomerDto;
 import luca.springframework.brewery.web.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -32,17 +26,17 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDto> handleCustomer (@Valid @RequestBody CustomerDto customerDto) {
+    public ResponseEntity<CustomerDto> handleCustomer (@Validated @RequestBody CustomerDto customerDto) {
         CustomerDto saveDto = customerServiceImpl.saveNewCustomer(customerDto);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/api/v1/customer" + saveDto.getCustomerId().toString());
+        headers.add("Location", "/api/v1/customer/" + saveDto.getCustomerId().toString());
 
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{customerId}")
-    public ResponseEntity<CustomerDto> updateCustomer (@PathVariable UUID customerId, @Valid @RequestBody CustomerDto customerDto) {
+    public ResponseEntity<CustomerDto> updateCustomer (@PathVariable UUID customerId, @Validated @RequestBody CustomerDto customerDto) {
         customerServiceImpl.updateCustomer(customerId, customerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
